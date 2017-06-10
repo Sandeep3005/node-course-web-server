@@ -1,8 +1,9 @@
 const express = require('express');
 const hbs = require('hbs');
+const axios = require('axios');
 
 let port = process.env.PORT || 8080;
-let maintainenceMode = true;
+let maintainenceMode = false;
 
 let app = express();
 
@@ -48,6 +49,25 @@ app.get('/about', (req, res)=> {
     currentYear : new Date().getFullYear()
   }
   res.render('about.hbs', pageValues);
+})
+
+app.get('/profile', (req, res)=> {
+  let repoUrl = `https://api.github.com/users/sandeep3005/repos`;
+  let pageValues = {
+    pageTitle : 'Profile',
+    currentYear : new Date().getFullYear()
+  };
+  let repoLists = axios.get(repoUrl).then((response)=>{
+    if (response.status === 200) {
+      pageValues.repos = response.data;
+      res.render('profile.hbs', pageValues);
+    } else {
+      throw new Error('Some problem with code, show it to code doctor')
+    }
+  }).catch((error) =>{
+    error = 'Some problem with code, show it to code doctor';
+    console.log(error);
+  })
 })
 
 app.listen(port,()=>{

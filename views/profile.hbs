@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Some Website | {{pageTitle}}</title>
+  </head>
+  <body>
+    {{> header}}
+    <ul>
+      {{#each repos}}
+        <li>{{makeItBig name}}</li>
+      {{/each}}
+    </ul>
+    {{> footer}}
+  </body>
+</html>
