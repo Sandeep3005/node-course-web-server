@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 
 let port = process.env.PORT || 8080;
-let maintainenceMode = false;
+let maintainenceMode = true;
 
 let app = express();
 
