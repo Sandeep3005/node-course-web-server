@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 
+let port = process.env.PORT || 8080;
 let maintainenceMode = false;
 
 let app = express();
@@ -49,6 +50,6 @@ app.get('/about', (req, res)=> {
   res.render('about.hbs', pageValues);
 })
 
-app.listen(8080,()=>{
-  console.log('Server is up and running on port 8080');
+app.listen(port,()=>{
+  console.log(`Server is up and running on port ${port}`);
 });
